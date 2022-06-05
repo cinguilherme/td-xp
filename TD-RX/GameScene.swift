@@ -17,9 +17,16 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    private var redNode: SKSpriteNode?
+    
     override func sceneDidLoad() {
 
         self.lastUpdateTime = 0
+        
+        // get rednode from screen
+        redNode = self.childNode(withName: "RedNode") as? SKSpriteNode
+
+        
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -48,6 +55,14 @@ class GameScene: SKScene {
             n.position = pos
             n.strokeColor = SKColor.green
             self.addChild(n)
+        }
+
+        moveRedNodeTo(at: pos);
+    }
+
+    func moveRedNodeTo(at pos: CGPoint) {
+        if let redNode = self.redNode {
+            redNode.position = pos
         }
     }
     
