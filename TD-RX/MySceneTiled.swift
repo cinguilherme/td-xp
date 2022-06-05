@@ -13,18 +13,17 @@ class MySceneTiled: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
+    var listTowers: Array<Tower> = []
     var central = CentralPillar()
-    var tower = Tower()
     
     override func sceneDidLoad() {
 
         print("loaded screen")
 
         central.newCentralPillar()
-        tower.newTower()
         
-        self.addChild(central.display!)
-        self.addChild(tower.display!)
+        addChild(central.display!)
+
     }
 
     
@@ -32,16 +31,47 @@ class MySceneTiled: SKScene {
     
         print("touched screen")
 
-        tower.display?.position = (touches.first?.location(in: self))!
+        let point = (touches.first?.location(in: self))!
+        let t = Tower.newTower(at: point)
+        addChild(t.display!)
+        listTowers.append(t)
+        
     }
 
-    override func update(_ currentTime: TimeInterval) {
-        
-        if tower.cool_down() {
-            print("no cooldown")
+    func towersNotOnCoolDown(listTower: Array<Tower>) -> Array<Tower> {
+        let liveTs = listTower.filter { tower in
+            tower.cool_down()
         }
-        //var shots = tower.spawnShots()
+        print("live towers")
+        print(liveTs)
         
+        return liveTs
+    }
+    
+    func towersSpawnShots(listTower: Array<Tower>) -> Array<Shot> {
+        print("listOfTower")
+        print(listTower)
+        let shots = listTower.map { Tower in
+            Tower.spawnShots()
+        }.flatMap { $0 }
+        
+        print("shots")
+        print(shots)
+        
+        return shots
+    }
+    
+    func liveShots(shots: Array<Shot>) {
+        for s in shots {
+            addChild(s.displays!)
+            s.followTrajectory()
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        let towers = towersNotOnCoolDown(listTower: listTowers)
+        let shots = towersSpawnShots(listTower: towers)
+        liveShots(shots: shots)
     }
     
 }

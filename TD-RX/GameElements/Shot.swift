@@ -19,15 +19,21 @@ class Shot {
     static func newShot(startPoint at: CGPoint) -> Shot {
         let shot = Shot()
         shot.displays = SKSpriteNode(color: .cyan, size: CGSize(width: 5.0, height: 5.0))
+        shot.displays?.position = at
         shot.startPoint = at
-        shot.destination = CGPoint(x: at.x, y: (at.y + 100.0))
+        shot.destination = CGPoint(x: at.x, y: (at.y + 1000.0))
         return shot
     }
     
     func followTrajectory() {
         if let destination = destination {
-            displays!.run(SKAction.moveTo(x: destination.x, duration: TimeInterval(1.5)))
-            displays!.run(SKAction.moveTo(y: destination.y, duration: TimeInterval(1.5)))
+            
+            displays!.run(SKAction.sequence(
+                [SKAction.group([
+                    SKAction.moveTo(x: destination.x, duration: TimeInterval(2.0)),
+                    SKAction.moveTo(y: destination.y, duration: TimeInterval(2.0))
+                ]),
+                SKAction.removeFromParent()]))
         }
     }
     

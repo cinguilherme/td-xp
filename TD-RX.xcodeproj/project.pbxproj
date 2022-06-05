@@ -26,6 +26,9 @@
 		8CB89322284D5A51003B771B /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89321284D5A51003B771B /* Shot.swift */; };
 		8CB89324284D5A5A003B771B /* CentralPillar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89323284D5A5A003B771B /* CentralPillar.swift */; };
 		8CB89326284D5A62003B771B /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89325284D5A62003B771B /* Enemy.swift */; };
+		8CB89328284D6D4D003B771B /* GlobalStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89327284D6D4D003B771B /* GlobalStats.swift */; };
+		8CB8932A284D6D5F003B771B /* TowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89329284D6D5F003B771B /* TowerStats.swift */; };
+		8CB8932C284D6D6A003B771B /* ShotStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8932B284D6D6A003B771B /* ShotStats.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		8CB89321284D5A51003B771B /* Shot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		8CB89323284D5A5A003B771B /* CentralPillar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralPillar.swift; sourceTree = "<group>"; };
 		8CB89325284D5A62003B771B /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		8CB89327284D6D4D003B771B /* GlobalStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStats.swift; sourceTree = "<group>"; };
+		8CB89329284D6D5F003B771B /* TowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerStats.swift; sourceTree = "<group>"; };
+		8CB8932B284D6D6A003B771B /* ShotStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotStats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,9 @@
 				8CB89321284D5A51003B771B /* Shot.swift */,
 				8CB89323284D5A5A003B771B /* CentralPillar.swift */,
 				8CB89325284D5A62003B771B /* Enemy.swift */,
+				8CB89327284D6D4D003B771B /* GlobalStats.swift */,
+				8CB89329284D6D5F003B771B /* TowerStats.swift */,
+				8CB8932B284D6D6A003B771B /* ShotStats.swift */,
 			);
 			path = GameElements;
 			sourceTree = "<group>";
@@ -303,10 +312,13 @@
 			files = (
 				8CB892E9284C4430003B771B /* GameScene.swift in Sources */,
 				8CB892EB284C4430003B771B /* GameViewController.swift in Sources */,
+				8CB89328284D6D4D003B771B /* GlobalStats.swift in Sources */,
+				8CB8932C284D6D6A003B771B /* ShotStats.swift in Sources */,
 				8CB8931F284D59F4003B771B /* Tower.swift in Sources */,
 				8CB89322284D5A51003B771B /* Shot.swift in Sources */,
 				8CB89326284D5A62003B771B /* Enemy.swift in Sources */,
 				8CB892E3284C4430003B771B /* AppDelegate.swift in Sources */,
+				8CB8932A284D6D5F003B771B /* TowerStats.swift in Sources */,
 				8CB8931C284D3B00003B771B /* MySceneTiled.swift in Sources */,
 				8CB89324284D5A5A003B771B /* CentralPillar.swift in Sources */,
 			);
