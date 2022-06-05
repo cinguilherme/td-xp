@@ -18,7 +18,28 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     private var redNode: SKSpriteNode?
-    
+
+    private var dinamicNode: SKSpriteNode?
+
+    // did evaluate actions
+    override func didEvaluateActions() {
+        print("2")
+    }
+    // did simulate physics
+    override func didSimulatePhysics() {
+        print("3")
+    }
+
+    // did apply constraints
+    override func didApplyConstraints() {
+        print("4")
+    }
+
+    // did finish update
+    override func didFinishUpdate() {
+        print("5")
+    }
+
     override func sceneDidLoad() {
 
         self.lastUpdateTime = 0
@@ -26,7 +47,11 @@ class GameScene: SKScene {
         // get rednode from screen
         redNode = self.childNode(withName: "RedNode") as? SKSpriteNode
 
+        // instanciate new spriteNode in the middle of scene with color blue and size 50
+        dinamicNode = SKSpriteNode(color: .blue, size: CGSize(width: 50, height: 50))
         
+        // add dinamicNode to scene
+        self.addChild(dinamicNode!)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -63,6 +88,11 @@ class GameScene: SKScene {
     func moveRedNodeTo(at pos: CGPoint) {
         if let redNode = self.redNode {
             redNode.position = pos
+            if dinamicNode != nil {
+                dinamicNode?.run(SKAction.moveTo(x: pos.x, duration: TimeInterval(1.5)))
+                dinamicNode?.run(SKAction.moveTo(y: pos.y, duration: TimeInterval(1.5)))
+                //dinamicNode?.position = CGPoint(x: pos.x, y: pos.y - 50.0)
+            }
         }
     }
     
@@ -104,6 +134,7 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
+        print(1)
         // Called before each frame is rendered
         
         // Initialize _lastUpdateTime if it has not already been

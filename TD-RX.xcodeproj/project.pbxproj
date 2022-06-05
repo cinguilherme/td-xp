@@ -18,6 +18,14 @@
 		8CB892FD284C4432003B771B /* TD_RXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB892FC284C4432003B771B /* TD_RXTests.swift */; };
 		8CB89307284C4432003B771B /* TD_RXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89306284C4432003B771B /* TD_RXUITests.swift */; };
 		8CB89309284C4432003B771B /* TD_RXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89308284C4432003B771B /* TD_RXUITestsLaunchTests.swift */; };
+		8CB89316284D31FA003B771B /* MySceneTiled.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8CB89315284D31FA003B771B /* MySceneTiled.sks */; };
+		8CB89318284D3216003B771B /* MyTileSetG.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8CB89317284D3216003B771B /* MyTileSetG.sks */; };
+		8CB8931A284D32EA003B771B /* MyTileSetSec.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8CB89319284D32EA003B771B /* MyTileSetSec.sks */; };
+		8CB8931C284D3B00003B771B /* MySceneTiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8931B284D3B00003B771B /* MySceneTiled.swift */; };
+		8CB8931F284D59F4003B771B /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8931E284D59F4003B771B /* Tower.swift */; };
+		8CB89322284D5A51003B771B /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89321284D5A51003B771B /* Shot.swift */; };
+		8CB89324284D5A5A003B771B /* CentralPillar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89323284D5A5A003B771B /* CentralPillar.swift */; };
+		8CB89326284D5A62003B771B /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89325284D5A62003B771B /* Enemy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +60,15 @@
 		8CB89302284C4432003B771B /* TD-RXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TD-RXUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB89306284C4432003B771B /* TD_RXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TD_RXUITests.swift; sourceTree = "<group>"; };
 		8CB89308284C4432003B771B /* TD_RXUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TD_RXUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8CB89315284D31FA003B771B /* MySceneTiled.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MySceneTiled.sks; sourceTree = "<group>"; };
+		8CB89317284D3216003B771B /* MyTileSetG.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSetG.sks; sourceTree = "<group>"; };
+		8CB89319284D32EA003B771B /* MyTileSetSec.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSetSec.sks; sourceTree = "<group>"; };
+		8CB8931B284D3B00003B771B /* MySceneTiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySceneTiled.swift; sourceTree = "<group>"; };
+		8CB8931D284D52D7003B771B /* TD-RX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TD-RX.entitlements"; sourceTree = "<group>"; };
+		8CB8931E284D59F4003B771B /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
+		8CB89321284D5A51003B771B /* Shot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
+		8CB89323284D5A5A003B771B /* CentralPillar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralPillar.swift; sourceTree = "<group>"; };
+		8CB89325284D5A62003B771B /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +119,7 @@
 		8CB892E1284C4430003B771B /* TD-RX */ = {
 			isa = PBXGroup;
 			children = (
+				8CB8931D284D52D7003B771B /* TD-RX.entitlements */,
 				8CB892E2284C4430003B771B /* AppDelegate.swift */,
 				8CB892E4284C4430003B771B /* GameScene.sks */,
 				8CB892E6284C4430003B771B /* Actions.sks */,
@@ -110,6 +128,11 @@
 				8CB892EC284C4430003B771B /* Main.storyboard */,
 				8CB892EF284C4432003B771B /* Assets.xcassets */,
 				8CB892F1284C4432003B771B /* LaunchScreen.storyboard */,
+				8CB89315284D31FA003B771B /* MySceneTiled.sks */,
+				8CB8931B284D3B00003B771B /* MySceneTiled.swift */,
+				8CB89319284D32EA003B771B /* MyTileSetSec.sks */,
+				8CB89317284D3216003B771B /* MyTileSetG.sks */,
+				8CB89320284D5A03003B771B /* GameElements */,
 			);
 			path = "TD-RX";
 			sourceTree = "<group>";
@@ -129,6 +152,17 @@
 				8CB89308284C4432003B771B /* TD_RXUITestsLaunchTests.swift */,
 			);
 			path = "TD-RXUITests";
+			sourceTree = "<group>";
+		};
+		8CB89320284D5A03003B771B /* GameElements */ = {
+			isa = PBXGroup;
+			children = (
+				8CB8931E284D59F4003B771B /* Tower.swift */,
+				8CB89321284D5A51003B771B /* Shot.swift */,
+				8CB89323284D5A5A003B771B /* CentralPillar.swift */,
+				8CB89325284D5A62003B771B /* Enemy.swift */,
+			);
+			path = GameElements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +269,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CB89318284D3216003B771B /* MyTileSetG.sks in Resources */,
 				8CB892EE284C4430003B771B /* Main.storyboard in Resources */,
+				8CB8931A284D32EA003B771B /* MyTileSetSec.sks in Resources */,
+				8CB89316284D31FA003B771B /* MySceneTiled.sks in Resources */,
 				8CB892E5284C4430003B771B /* GameScene.sks in Resources */,
 				8CB892F0284C4432003B771B /* Assets.xcassets in Resources */,
 				8CB892F3284C4432003B771B /* LaunchScreen.storyboard in Resources */,
@@ -266,7 +303,12 @@
 			files = (
 				8CB892E9284C4430003B771B /* GameScene.swift in Sources */,
 				8CB892EB284C4430003B771B /* GameViewController.swift in Sources */,
+				8CB8931F284D59F4003B771B /* Tower.swift in Sources */,
+				8CB89322284D5A51003B771B /* Shot.swift in Sources */,
+				8CB89326284D5A62003B771B /* Enemy.swift in Sources */,
 				8CB892E3284C4430003B771B /* AppDelegate.swift in Sources */,
+				8CB8931C284D3B00003B771B /* MySceneTiled.swift in Sources */,
+				8CB89324284D5A5A003B771B /* CentralPillar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,14 +483,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TD-RX/TD-RX.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J9DF9CVA4;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.simulation-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -458,6 +503,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gcc.TD-RX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,14 +515,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TD-RX/TD-RX.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J9DF9CVA4;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.simulation-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,6 +535,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gcc.TD-RX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
