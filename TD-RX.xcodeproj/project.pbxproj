@@ -29,6 +29,11 @@
 		8CB89328284D6D4D003B771B /* GlobalStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89327284D6D4D003B771B /* GlobalStats.swift */; };
 		8CB8932A284D6D5F003B771B /* TowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89329284D6D5F003B771B /* TowerStats.swift */; };
 		8CB8932C284D6D6A003B771B /* ShotStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8932B284D6D6A003B771B /* ShotStats.swift */; };
+		8CB8932E284D7AD6003B771B /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB8932D284D7AD6003B771B /* Direction.swift */; };
+		8CB89331284D7C07003B771B /* ShotLogicStraight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89330284D7C07003B771B /* ShotLogicStraight.swift */; };
+		8CB89334284D7DAC003B771B /* GridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89333284D7DAC003B771B /* GridState.swift */; };
+		8CB89336284D7DFA003B771B /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89335284D7DFA003B771B /* GridCell.swift */; };
+		8CB89338284D7E3E003B771B /* GridLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB89337284D7E3E003B771B /* GridLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +80,11 @@
 		8CB89327284D6D4D003B771B /* GlobalStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStats.swift; sourceTree = "<group>"; };
 		8CB89329284D6D5F003B771B /* TowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowerStats.swift; sourceTree = "<group>"; };
 		8CB8932B284D6D6A003B771B /* ShotStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotStats.swift; sourceTree = "<group>"; };
+		8CB8932D284D7AD6003B771B /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		8CB89330284D7C07003B771B /* ShotLogicStraight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotLogicStraight.swift; sourceTree = "<group>"; };
+		8CB89333284D7DAC003B771B /* GridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridState.swift; sourceTree = "<group>"; };
+		8CB89335284D7DFA003B771B /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
+		8CB89337284D7E3E003B771B /* GridLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,15 +173,36 @@
 		8CB89320284D5A03003B771B /* GameElements */ = {
 			isa = PBXGroup;
 			children = (
+				8CB89332284D7DA0003B771B /* Grid */,
 				8CB8931E284D59F4003B771B /* Tower.swift */,
-				8CB89321284D5A51003B771B /* Shot.swift */,
+				8CB8932F284D7BF1003B771B /* Shot */,
 				8CB89323284D5A5A003B771B /* CentralPillar.swift */,
 				8CB89325284D5A62003B771B /* Enemy.swift */,
 				8CB89327284D6D4D003B771B /* GlobalStats.swift */,
 				8CB89329284D6D5F003B771B /* TowerStats.swift */,
 				8CB8932B284D6D6A003B771B /* ShotStats.swift */,
+				8CB8932D284D7AD6003B771B /* Direction.swift */,
 			);
 			path = GameElements;
+			sourceTree = "<group>";
+		};
+		8CB8932F284D7BF1003B771B /* Shot */ = {
+			isa = PBXGroup;
+			children = (
+				8CB89321284D5A51003B771B /* Shot.swift */,
+				8CB89330284D7C07003B771B /* ShotLogicStraight.swift */,
+			);
+			path = Shot;
+			sourceTree = "<group>";
+		};
+		8CB89332284D7DA0003B771B /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				8CB89333284D7DAC003B771B /* GridState.swift */,
+				8CB89335284D7DFA003B771B /* GridCell.swift */,
+				8CB89337284D7E3E003B771B /* GridLogic.swift */,
+			);
+			path = Grid;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,12 +346,17 @@
 				8CB89328284D6D4D003B771B /* GlobalStats.swift in Sources */,
 				8CB8932C284D6D6A003B771B /* ShotStats.swift in Sources */,
 				8CB8931F284D59F4003B771B /* Tower.swift in Sources */,
+				8CB89334284D7DAC003B771B /* GridState.swift in Sources */,
 				8CB89322284D5A51003B771B /* Shot.swift in Sources */,
+				8CB89331284D7C07003B771B /* ShotLogicStraight.swift in Sources */,
 				8CB89326284D5A62003B771B /* Enemy.swift in Sources */,
 				8CB892E3284C4430003B771B /* AppDelegate.swift in Sources */,
 				8CB8932A284D6D5F003B771B /* TowerStats.swift in Sources */,
 				8CB8931C284D3B00003B771B /* MySceneTiled.swift in Sources */,
 				8CB89324284D5A5A003B771B /* CentralPillar.swift in Sources */,
+				8CB8932E284D7AD6003B771B /* Direction.swift in Sources */,
+				8CB89338284D7E3E003B771B /* GridLogic.swift in Sources */,
+				8CB89336284D7DFA003B771B /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

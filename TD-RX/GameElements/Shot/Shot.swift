@@ -10,19 +10,33 @@ import SpriteKit
 
 class Shot {
     
-    var displays: SKSpriteNode?
+    let baseLineETA = 5.0
+    var speed: Float64 = 0.0
     
+    var displays: SKSpriteNode?
     var directionPointed: NSEnumerator?
     var startPoint: CGPoint?
     var destination: CGPoint?
+    var destinations: Array<CGPoint>?
     
     static func newShot(startPoint at: CGPoint) -> Shot {
+        
         let shot = Shot()
         shot.displays = SKSpriteNode(color: .cyan, size: CGSize(width: 5.0, height: 5.0))
         shot.displays?.position = at
         shot.startPoint = at
-        shot.destination = CGPoint(x: at.x, y: (at.y + 1000.0))
+        
+        shot.speed = 0.0
+        
+        shot.destination = shotLogicInLineDestination(from: at, direction: Direction.North)
+        
         return shot
+    }
+    
+    func timeToDestinationBasedOnSpeed() -> TimeInterval {
+        let expected = baseLineETA - ((baseLineETA / 100) * speed)
+        
+        return TimeInterval(expected)
     }
     
     func followTrajectory() {

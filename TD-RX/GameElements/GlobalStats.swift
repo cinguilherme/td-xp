@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class GlobalStats {
+    
+    var bonuses: Array<Any> = []
+    
+    var globalTickRate = 60
+    var globalSeep = 0.0
+    
+}

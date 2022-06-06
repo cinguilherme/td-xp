@@ -13,52 +13,44 @@ class MySceneTiled: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
+    var tileMap: SKTileMapNode = SKTileMapNode()
+    
+    var logicalCells: Array<Any> = []
+    
     var listTowers: Array<Tower> = []
     var central = CentralPillar()
     
     override func sceneDidLoad() {
 
         print("loaded screen")
-
-        central.newCentralPillar()
         
+        central.newCentralPillar()
         addChild(central.display!)
-
     }
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
         print("touched screen")
 
         let point = (touches.first?.location(in: self))!
+        
+        //let locatedCellInGrid =
+        
         let t = Tower.newTower(at: point)
         addChild(t.display!)
         listTowers.append(t)
-        
     }
 
     func towersNotOnCoolDown(listTower: Array<Tower>) -> Array<Tower> {
-        let liveTs = listTower.filter { tower in
+        return listTower.filter { tower in
             tower.cool_down()
         }
-        print("live towers")
-        print(liveTs)
-        
-        return liveTs
     }
     
     func towersSpawnShots(listTower: Array<Tower>) -> Array<Shot> {
-        print("listOfTower")
-        print(listTower)
-        let shots = listTower.map { Tower in
+        return listTower.map { Tower in
             Tower.spawnShots()
         }.flatMap { $0 }
-        
-        print("shots")
-        print(shots)
-        
-        return shots
     }
     
     func liveShots(shots: Array<Shot>) {
