@@ -11,10 +11,6 @@ func cellForPointOn(point: CGPoint, grid: GridState) -> GridCell? {
     
     if let size = grid.cellSize {
         print("cell lookup")
-        let x = point.x / size.width
-        let y = point.y / size.height
-        
-        return grid.cellAt(x: x, y: y)
         
     }
     

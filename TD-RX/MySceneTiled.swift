@@ -38,17 +38,30 @@ class MySceneTiled: SKScene {
         }
     }
     
+    func handleTapFrom(recognizer: UITapGestureRecognizer) {
+        if recognizer.state != .ended {
+            return
+        }
+
+        let recognizorLocation = recognizer.location(in: recognizer.view!)
+        let location = self.convertPoint(fromView: recognizorLocation)
+
+        let column = tileMapNode!.tileColumnIndex(fromPosition: location)
+        let row = tileMapNode!.tileRowIndex(fromPosition: location)
+        let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
+        
+        print("touched cell at \(row) and \(column)")
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
         print("touched screen")
 
         let point = (touches.first?.location(in: self))!
         
-        if let gridState = self.gridState {
-            if let cell = cellForPointOn(point: point, grid: gridState) {
-                print(cell)
-            }
-        }
+        let c = tileMapNode?.tileColumnIndex(fromPosition: point)
+        let r = tileMapNode?.tileRowIndex(fromPosition: point)
+        let def = tileMapNode?.tileDefinition(atColumn: c!, row: r!)
         
         let t = Tower.newTower(at: point)
         addChild(t.display!)

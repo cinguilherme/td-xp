@@ -10,6 +10,8 @@ import SpriteKit
 
 class GridState {
     
+    var tileMapNode: SKTileMapNode?
+    
     var cellSize: CGSize?
     
     var cells: Array<GridCell> = []
@@ -28,17 +30,7 @@ class GridState {
         print(cellHash)
     }
     
-    func cellAt(x: CGFloat, y: CGFloat) -> GridCell? {
-        
-        // from x to lower x nad y to lower y, use this as key for the hash and recover the cell.
-        if let cellSize = cellSize {
-            
-            let bx = (x / cellSize.width)
-            let by = (y / cellSize.height)
-            let strKey = String(describing: bx) + String(describing: by)
-            print(strKey)
-            
-        }
+    func cellAt(position: CGPoint) -> GridCell? {
         
         return cells.filter { GridCell in
             let limits = GridCell.positionLimits as! (CGFloat, CGFloat, CGFloat, CGFloat)
