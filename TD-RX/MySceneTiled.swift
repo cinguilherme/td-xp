@@ -26,16 +26,9 @@ class MySceneTiled: SKScene {
         print("loaded screen")
         print("wating on tileMapNode to arive")
         
-        //tileMapNode = SKNode.unarchiveFromFile(file: "MySceneTiled")?.children.first as! SKTileMapNode
-        
-        //print("tilemapnode is here!")
-        
         print(tileMapNode)
         
-        gridState = GridState()
-        
-        //populate gridStateCells with the empty cells
-        
+
         central.newCentralPillar()
         addChild(central.display!)
     }
@@ -44,7 +37,8 @@ class MySceneTiled: SKScene {
         self.tileMapNode = node
         
         if let node = self.tileMapNode {
-            GridState.buildFromSkTileMapNode(node: node)
+            self.gridState = GridState.buildFromSkTileMapNode(node: node)
+            print(self.gridState!.cells)
         }
     }
     
@@ -54,11 +48,14 @@ class MySceneTiled: SKScene {
 
         let point = (touches.first?.location(in: self))!
         
-        //let locatedCellInGrid =
-        
-        var cell = cellForPointOn(point: point, grid: gridState!)
-        print(cell)
-        
+        if let gridState = self.gridState {
+            print(gridState.cellSize)
+            print(gridState.cells)
+            
+            if let cell = cellForPointOn(point: point, grid: gridState) {
+                print(cell)
+            }
+        }
         
         let t = Tower.newTower(at: point)
         addChild(t.display!)

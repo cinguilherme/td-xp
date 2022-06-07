@@ -7,10 +7,19 @@
 
 import Foundation
 
-class GridCell {
+class GridCell : CustomStringConvertible{
+    var description: String {
+        get {
+            return "{valid: \(valid ?? true) size: \(String(describing: size)) occupiedBy: \(String(describing: ocupiedBy)) positionLimits: \(String(describing: positionLimits))  }"
+        }
+    }
+    
     
     var valid: Bool?
-    var size: Int32 = 64
+    var size: CGSize?
     var ocupiedBy: String?
+    var positionLimits: Any?
+    
+
     
 }

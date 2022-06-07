@@ -7,14 +7,16 @@
 
 import Foundation
 
-func cellForPointOn(point: CGPoint, grid: GridState) -> GridCell {
+func cellForPointOn(point: CGPoint, grid: GridState) -> GridCell? {
     
-    let size = grid.cellSize
-    
-    let x = point.x / size
-    let y = point.y / size
-    
-    let cell = grid.cellAt(x: x, y: y)
+    if let size = grid.cellSize {
+        print("cell lookup")
+        let x = point.x / size.width
+        let y = point.y / size.height
+        
+        return grid.cellAt(x: x, y: y)
+        
+    }
     
     return GridCell()
 }
