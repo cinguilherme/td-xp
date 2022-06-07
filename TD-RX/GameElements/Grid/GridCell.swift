@@ -20,7 +20,6 @@ class GridCell : CustomStringConvertible{
     var ocupiedBy: String?
     var positionLimits: Any?
     
-
     var description: String {
         get {
             return "{valid: \(valid ?? true) size: \(String(describing: size)) occupiedBy: \(String(describing: ocupiedBy)))}"

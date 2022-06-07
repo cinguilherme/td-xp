@@ -49,14 +49,19 @@ class MySceneTiled: SKScene {
         let row = tileMapNode!.tileRowIndex(fromPosition: point)
         let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
         
+        let actualPoint = tileMapNode!.centerOfTile(atColumn: column, row: row)
+        print(actualPoint)
+        
         let cell = gridState!.cellAtTile(row, column)
         
         print("touched cell at \(row) and \(column)")
         
+        
         print("cell object", cell)
         
         
-        let t = Tower.newTower(at: point)
+        
+        let t = Tower.newTower(at: actualPoint)
         addChild(t.display!)
         listTowers.append(t)
     }
