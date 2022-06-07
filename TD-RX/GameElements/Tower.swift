@@ -12,7 +12,7 @@ class Tower {
     
     var display: SKSpriteNode?
     
-    var cooldownTimeTicks = 30
+    var cooldownTimeTicks = 10
     
     var currentTick = 0
     

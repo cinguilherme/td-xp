@@ -13,7 +13,9 @@ class MySceneTiled: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
-    var tileMap: SKTileMapNode = SKTileMapNode()
+    var tileMapNode: SKTileMapNode?
+    
+    var gridState: GridState?
     
     var logicalCells: Array<Any> = []
     
@@ -23,6 +25,10 @@ class MySceneTiled: SKScene {
     override func sceneDidLoad() {
 
         print("loaded screen")
+        print(tileMapNode)
+        gridState = GridState()
+        
+        //populate gridStateCells with the empty cells
         
         central.newCentralPillar()
         addChild(central.display!)
@@ -35,6 +41,10 @@ class MySceneTiled: SKScene {
         let point = (touches.first?.location(in: self))!
         
         //let locatedCellInGrid =
+        
+        var cell = cellForPointOn(point: point, grid: gridState!)
+        print(cell)
+        
         
         let t = Tower.newTower(at: point)
         addChild(t.display!)
