@@ -14,7 +14,31 @@ class GridState {
     
     var cells: Array<GridCell> = []
     
+    var cellHash: [String : GridCell] = [:]
+
+    func buildHash() {
+        cells.forEach { cell in
+            let posL = cell.positionLimits as! (CGFloat, CGFloat, CGFloat, CGFloat)
+            let x = String(describing: posL.0)
+            let y = String(describing: posL.1)
+            
+            cellHash[x+y] = cell
+        }
+        
+        print(cellHash)
+    }
+    
     func cellAt(x: CGFloat, y: CGFloat) -> GridCell? {
+        
+        // from x to lower x nad y to lower y, use this as key for the hash and recover the cell.
+        if let cellSize = cellSize {
+            
+            let bx = (x / cellSize.width)
+            let by = (y / cellSize.height)
+            let strKey = String(describing: bx) + String(describing: by)
+            print(strKey)
+            
+        }
         
         return cells.filter { GridCell in
             let limits = GridCell.positionLimits as! (CGFloat, CGFloat, CGFloat, CGFloat)
@@ -23,9 +47,8 @@ class GridState {
         
     }
 
-    
     static func buildFromSkTileMapNode(node: SKTileMapNode) -> GridState {
-        print("gridState prebuild")
+        
         let state = GridState()
         state.cellSize = node.tileSize
         
@@ -44,17 +67,17 @@ class GridState {
                 cell.size = node.tileSize
                 cell.valid = true
                 
-                // from the size of the nodeTileSize and the enumeration c and r, define the limits of x,y to wich this cell is valid
                 let lowx = xAsCGFloat * width
                 let lowy = yAsCGFloat * hight
                 let highx = ((xAsCGFloat+1) * width) - 1
                 let highy = ((yAsCGFloat+1) * hight) - 1
                 
                 cell.positionLimits = (lower_x: lowx, lower_y: lowy, high_x: highx, high_y: highy)
-                
                 state.cells.append(cell)
             }
         }
+        
+        state.buildHash()
         
         return state
     }

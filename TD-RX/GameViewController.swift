@@ -31,8 +31,6 @@ class GameViewController: UIViewController {
                 
                 sceneNode.notifyTileNodeLoaded(node: tileMapNode)
                 
-                print(sceneNode.entities)
-                
                 sceneNode.graphs = scene.graphs
                 
                 // Set the scale mode to scale to fit the window

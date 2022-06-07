@@ -26,9 +26,6 @@ class MySceneTiled: SKScene {
         print("loaded screen")
         print("wating on tileMapNode to arive")
         
-        print(tileMapNode)
-        
-
         central.newCentralPillar()
         addChild(central.display!)
     }
@@ -38,7 +35,6 @@ class MySceneTiled: SKScene {
         
         if let node = self.tileMapNode {
             self.gridState = GridState.buildFromSkTileMapNode(node: node)
-            print(self.gridState!.cells)
         }
     }
     
@@ -49,9 +45,6 @@ class MySceneTiled: SKScene {
         let point = (touches.first?.location(in: self))!
         
         if let gridState = self.gridState {
-            print(gridState.cellSize)
-            print(gridState.cells)
-            
             if let cell = cellForPointOn(point: point, grid: gridState) {
                 print(cell)
             }
