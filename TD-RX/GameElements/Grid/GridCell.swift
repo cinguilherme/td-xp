@@ -15,7 +15,7 @@ class GridCell : CustomStringConvertible{
     
     var tileDefinition: SKTileDefinition?
     
-    var valid: Bool?
+    var valid: Bool = true
     var size: CGSize?
     var ocupiedBy: String?
     var positionLimits: Any?

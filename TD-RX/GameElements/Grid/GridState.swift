@@ -14,8 +14,6 @@ class GridState {
     
     var cellSize: CGSize?
     
-    var cells: Array<GridCell> = []
-    
     var cellHash: [String : GridCell] = [:]
     
     func keyFrom(_ row: Int, _ col: Int) -> String {
@@ -25,6 +23,14 @@ class GridState {
     func cellAtTile(_ row: Int, _ colunm: Int) -> GridCell {
         let key = keyFrom(row, colunm)
         return cellHash[key]!
+    }
+    
+    func pointToCell(point: CGPoint) {
+        let column = tileMapNode!.tileColumnIndex(fromPosition: point)
+        let row = tileMapNode!.tileRowIndex(fromPosition: point)
+        let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
+        
+        let actualPoint = tileMapNode!.centerOfTile(atColumn: column, row: row)
     }
 
     static func buildFromSkTileMapNode(node: SKTileMapNode) -> GridState {
