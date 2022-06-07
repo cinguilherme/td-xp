@@ -35,22 +35,8 @@ class MySceneTiled: SKScene {
         
         if let node = self.tileMapNode {
             self.gridState = GridState.buildFromSkTileMapNode(node: node)
+            print(self.gridState?.cellHash)
         }
-    }
-    
-    func handleTapFrom(recognizer: UITapGestureRecognizer) {
-        if recognizer.state != .ended {
-            return
-        }
-
-        let recognizorLocation = recognizer.location(in: recognizer.view!)
-        let location = self.convertPoint(fromView: recognizorLocation)
-
-        let column = tileMapNode!.tileColumnIndex(fromPosition: location)
-        let row = tileMapNode!.tileRowIndex(fromPosition: location)
-        let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
-        
-        print("touched cell at \(row) and \(column)")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,9 +45,16 @@ class MySceneTiled: SKScene {
 
         let point = (touches.first?.location(in: self))!
         
-        let c = tileMapNode?.tileColumnIndex(fromPosition: point)
-        let r = tileMapNode?.tileRowIndex(fromPosition: point)
-        let def = tileMapNode?.tileDefinition(atColumn: c!, row: r!)
+        let column = tileMapNode!.tileColumnIndex(fromPosition: point)
+        let row = tileMapNode!.tileRowIndex(fromPosition: point)
+        let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
+        
+        let cell = gridState!.cellAtTile(row, column)
+        
+        print("touched cell at \(row) and \(column)")
+        
+        print("cell object", cell)
+        
         
         let t = Tower.newTower(at: point)
         addChild(t.display!)

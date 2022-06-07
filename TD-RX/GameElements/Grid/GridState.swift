@@ -17,59 +17,31 @@ class GridState {
     var cells: Array<GridCell> = []
     
     var cellHash: [String : GridCell] = [:]
-
-    func buildHash() {
-        cells.forEach { cell in
-            let posL = cell.positionLimits as! (CGFloat, CGFloat, CGFloat, CGFloat)
-            let x = String(describing: posL.0)
-            let y = String(describing: posL.1)
-            
-            cellHash[x+y] = cell
-        }
-        
-        print(cellHash)
+    
+    func keyFrom(_ row: Int, _ col: Int) -> String {
+        return "row\(row):col\(col)"
     }
     
-    func cellAt(position: CGPoint) -> GridCell? {
-        
-        return cells.filter { GridCell in
-            let limits = GridCell.positionLimits as! (CGFloat, CGFloat, CGFloat, CGFloat)
-            return true
-        }.first
-        
+    func cellAtTile(_ row: Int, _ colunm: Int) -> GridCell {
+        let key = keyFrom(row, colunm)
+        return cellHash[key]!
     }
 
     static func buildFromSkTileMapNode(node: SKTileMapNode) -> GridState {
         
         let state = GridState()
+        
         state.cellSize = node.tileSize
         
         for c in 0...node.numberOfColumns {
             for r in 0...node.numberOfRows {
         
-                let xAsCGFloat = CGFloat(c)
-                let yAsCGFloat = CGFloat(r)
+                let key = "row\(r):col\(c)"
+                let v = GridCell()
                 
-                let cell = GridCell()
-                
-                let size = node.tileSize
-                let hight = size.height
-                let width = size.width
-                
-                cell.size = node.tileSize
-                cell.valid = true
-                
-                let lowx = xAsCGFloat * width
-                let lowy = yAsCGFloat * hight
-                let highx = ((xAsCGFloat+1) * width) - 1
-                let highy = ((yAsCGFloat+1) * hight) - 1
-                
-                cell.positionLimits = (lower_x: lowx, lower_y: lowy, high_x: highx, high_y: highy)
-                state.cells.append(cell)
+                state.cellHash[key] = v
             }
         }
-        
-        state.buildHash()
         
         return state
     }
