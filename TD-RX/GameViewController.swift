@@ -19,12 +19,20 @@ class GameViewController: UIViewController {
         if let scene = GKScene(fileNamed: "MySceneTiled") {
         //if let scene = GKScene(fileNamed: "GameScene") {
             print("loaded scene?")
-            //print(scene.rootNode)
+            
+            let tileMapNode = SKNode.unarchiveFromFile(file: "MySceneTiled")?.children.first as! SKTileMapNode
+            
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! MySceneTiled? {
                 
                 // Copy gameplay related content over to the scene
                 sceneNode.entities = scene.entities
+                //sceneNode.tileMapNode = tileMapNode
+                
+                sceneNode.notifyTileNodeLoaded(node: tileMapNode)
+                
+                print(sceneNode.entities)
+                
                 sceneNode.graphs = scene.graphs
                 
                 // Set the scale mode to scale to fit the window
@@ -59,5 +67,23 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+}
+
+extension SKNode {
+    class func unarchiveFromFile(file : NSString) -> SKNode? {
+        if let path = Bundle.main.path(forResource: file as String, ofType: "sks") {
+            let sceneData = NSData(contentsOfFile: path)
+
+            let archiver = NSKeyedUnarchiver(forReadingWith: sceneData as! Data)
+
+            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+            let scene = archiver.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as! SKNode
+            archiver.finishDecoding()
+            return scene
+        } else {
+            return nil
+        }
     }
 }

@@ -23,15 +23,29 @@ class MySceneTiled: SKScene {
     var central = CentralPillar()
     
     override func sceneDidLoad() {
-
         print("loaded screen")
+        print("wating on tileMapNode to arive")
+        
+        //tileMapNode = SKNode.unarchiveFromFile(file: "MySceneTiled")?.children.first as! SKTileMapNode
+        
+        //print("tilemapnode is here!")
+        
         print(tileMapNode)
+        
         gridState = GridState()
         
         //populate gridStateCells with the empty cells
         
         central.newCentralPillar()
         addChild(central.display!)
+    }
+    
+    func notifyTileNodeLoaded(node: SKTileMapNode) {
+        self.tileMapNode = node
+        
+        if let node = self.tileMapNode {
+            GridState.buildFromSkTileMapNode(node: node)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,3 +91,4 @@ class MySceneTiled: SKScene {
     }
     
 }
+

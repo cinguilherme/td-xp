@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 class GridState {
     
@@ -16,5 +17,18 @@ class GridState {
     func cellAt(x: CGFloat, y: CGFloat) -> GridCell {
         return GridCell()
     }
+
     
+    static func buildFromSkTileMapNode(node: SKTileMapNode) -> GridState {
+        let state = GridState()
+        
+        state.cellSize = node.tileSize
+        
+        let count = node.numberOfRows
+        let cols = node.numberOfColumns
+        
+        return state
+    }
 }
+
+
