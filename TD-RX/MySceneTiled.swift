@@ -20,6 +20,10 @@ class MySceneTiled: SKScene {
     var logicalCells: Array<Any> = []
     
     var listTowers: Array<Tower> = []
+    
+    var enemyFactory: EnemyLevelfactory?
+    var enemies: Array<Enemy> = []
+    
     var central = CentralPillar()
     
     override func sceneDidLoad() {
@@ -28,6 +32,9 @@ class MySceneTiled: SKScene {
         
         central.newCentralPillar()
         addChild(central.display!)
+        
+        enemyFactory = EnemyLevelfactory()
+        enemyFactory?.centralPoint = central.point
     }
     
     func notifyTileNodeLoaded(node: SKTileMapNode) {
@@ -79,6 +86,12 @@ class MySceneTiled: SKScene {
         }.flatMap { $0 }
     }
     
+    func shots(listTowers: Array<Tower>) -> Array<Shot> {
+        return towersNotOnCoolDown(listTower: listTowers).map { t in
+            t.spawnShots()
+        }.flatMap { $0 }
+    }
+    
     func liveShots(shots: Array<Shot>) {
         for s in shots {
             addChild(s.displays!)
@@ -87,8 +100,16 @@ class MySceneTiled: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        let towers = towersNotOnCoolDown(listTower: listTowers)
-        let shots = towersSpawnShots(listTower: towers)
+        let shots = shots(listTowers: listTowers)
+        
+        if let newEnemies = enemyFactory?.newEnemiesSpawnByTick() {
+            newEnemies.forEach { Enemy in
+                addChild(Enemy.display!)
+                Enemy.followTrajectory()
+            }
+        }
+        //let enemies = enemies(listEnemies: listEnemies)
+        
         liveShots(shots: shots)
     }
     
