@@ -30,6 +30,11 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     var shotsSpawnTimer: Timer?
     
+    var towersCoolDownTimer: Timer?
+    
+    let concurrentQueue = DispatchQueue(label: "towers_spawns", attributes: .concurrent)
+    let enemyDispatchQueue = DispatchQueue(label: "enemy_factory", attributes: .concurrent)
+    
     override func sceneDidLoad() {
         print("loaded screen")
         print("wating on tileMapNode to arive")
@@ -45,15 +50,32 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
             if let newEnemies = self.enemyFactory?.newEnemiesSpawnByTick() {
             
                 newEnemies.forEach { Enemy in
-                    self.addChild(Enemy.display!)
-                    Enemy.followTrajectory()
+                    
+                    self.enemyDispatchQueue.sync {
+                        self.addChild(Enemy.display!)
+                    }
+                    
+                    self.enemyDispatchQueue.async {
+                        Enemy.followTrajectory()
+                    }
                 }
             }
         })
         
-        shotsSpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.2), repeats: true, block: { timer in
-            let newShots = SceneLogic.spawnNewShots(listTowers: self.listTowers)
-            self.addShotsToSceneAndBeginAnimation(shots: newShots)
+        towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.4), repeats: true, block: { tm in
+            
+            self.listTowers.forEach { t  in
+                self.concurrentQueue.sync {
+                    t.coolDownTimeCheck(0.4)
+                    
+                    t.spawnShots().forEach { s in
+                        self.addChild(s.displays!)
+                        s.followTrajectory()
+                    }
+                    
+                }
+            }
+            
         })
         
     }
@@ -100,10 +122,7 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     }
    
     override func didMove(to view: SKView) {
-        //let enemy = self.childNode(withName: "enemy")
-       
         self.physicsWorld.contactDelegate = self
-        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -114,16 +133,14 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
 
             let contactPoint = contact.contactPoint
             
-            //print(contactPoint)
-            
-            
+//            print(contactPoint)
         }
     }
     
     override func update(_ currentTime: TimeInterval) {
         
-        let newShots = SceneLogic.spawnNewShots(listTowers: listTowers)
-        addShotsToSceneAndBeginAnimation(shots: newShots)
+        //let newShots = SceneLogic.spawnNewShots(listTowers: listTowers)
+        //addShotsToSceneAndBeginAnimation(shots: newShots)
     
     }
     

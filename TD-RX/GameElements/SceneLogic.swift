@@ -9,23 +9,23 @@ import Foundation
 
 class SceneLogic {
 
-    static func towersNotOnCoolDown(listTower: Array<Tower>) -> Array<Tower> {
-        return listTower.filter { tower in
-            !tower.inCoolDown
-        }
-    }
+//    static func towersNotOnCoolDown(listTower: Array<Tower>) -> Array<Tower> {
+//        return listTower.filter { tower in
+//            !tower.inCoolDown
+//        }
+//    }
     
-    static func towersSpawnShots(listTower: Array<Tower>) -> Array<Shot> {
-        return listTower.map { Tower in
-            Tower.spawnShots()
-        }.flatMap { $0 }
-    }
+//    static func towersSpawnShots(listTower: Array<Tower>) -> Array<Shot> {
+//        return listTower.map { Tower in
+//            Tower.spawnShots()
+//        }.flatMap { $0 }
+//    }
     
-    static func spawnNewShots(listTowers: Array<Tower>) -> Array<Shot> {
-        return towersNotOnCoolDown(listTower: listTowers).map { t in
-            t.spawnShots()
-        }.flatMap { $0 }
-    }
+//    static func spawnNewShots(listTowers: Array<Tower>) -> Array<Shot> {
+//        return towersNotOnCoolDown(listTower: listTowers).map { t in
+//            t.spawnShots()
+//        }.flatMap { $0 }
+//    }
     
     static func collisionDetection(enemies: Array<Enemy>, liveShots: Array<Shot>) -> Array<(Enemy, Array<Shot>)> {
         return enemies.map { enemy -> (Enemy, Array<Shot>) in
