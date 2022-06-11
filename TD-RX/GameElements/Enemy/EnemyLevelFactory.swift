@@ -66,15 +66,12 @@ class EnemyLevelfactory {
         return en
     }
     
-    func newEnemiesSpawnByTick() -> Array<Enemy> {
-        if coolDown == false {
-            coolDown = true
-            let range = 0...5
-            return range.map { Int -> Enemy in
-                let sp = genRandomSpawnPointAwayFromCentralPoint(centralPoint: centralPoint!)
-                return spawnEnemy(centralPoint: centralPoint!, spawnPoint: sp)
-            }
-            
+    func newEnemiesSpawn() -> Array<Enemy> {
+        
+        let range = 0...5
+        return range.map { Int -> Enemy in
+            let sp = genRandomSpawnPointAwayFromCentralPoint(centralPoint: centralPoint!)
+            return spawnEnemy(centralPoint: centralPoint!, spawnPoint: sp)
         }
         
         return []

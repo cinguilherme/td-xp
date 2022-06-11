@@ -33,6 +33,7 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     var towersCoolDownTimer: Timer?
     
     let concurrentQueue = DispatchQueue(label: "towers_spawns", attributes: .concurrent)
+    
     let enemyDispatchQueue = DispatchQueue(label: "enemy_factory", attributes: .concurrent)
     
     override func sceneDidLoad() {
@@ -47,26 +48,28 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
         enemyFactory?.centralPoint = central.point
         
         enemySpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(1.0), repeats: true, block: { timer in
-            if let newEnemies = self.enemyFactory?.newEnemiesSpawnByTick() {
-            
-                newEnemies.forEach { Enemy in
-                    
-                    self.enemyDispatchQueue.sync {
-                        self.addChild(Enemy.display!)
+            self.enemyDispatchQueue.async {
+                if let newEnemies = self.enemyFactory?.newEnemiesSpawn() {
+                
+                    newEnemies.forEach { Enemy in
+                        Enemy.followTrajectory()
                     }
                     
-                    self.enemyDispatchQueue.async {
-                        Enemy.followTrajectory()
+                    DispatchQueue.main.sync {
+                        newEnemies.forEach { e in
+                            self.addChild(e.display!)
+                        }
                     }
                 }
             }
+            
         })
         
-        towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.4), repeats: true, block: { tm in
+        towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.1), repeats: true, block: { tm in
             
             self.listTowers.forEach { t  in
                 self.concurrentQueue.sync {
-                    t.coolDownTimeCheck(0.4)
+                    t.coolDownTimeCheck(0.1)
                     
                     t.spawnShots().forEach { s in
                         self.addChild(s.displays!)
@@ -85,6 +88,23 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
         
         if let node = self.tileMapNode {
             self.gridState = GridState.buildFromSkTileMapNode(node: node)
+            
+            //test default towers already in place so can assert performance
+            for x in 25...50 {
+                for y in 27...32 {
+                    let cell = gridState!.cellAtTile(x, y)
+                    let actualPoint = tileMapNode!.centerOfTile(atColumn: x, row: y)
+                    if cell.valid {
+                        let t = Tower.newTower(at: actualPoint)
+                        addChild(t.display!)
+                        listTowers.append(t)
+                        cell.valid = false
+                    } else {
+                        print("cell already ocupied, can't act here!")
+                    }
+                }
+            }
+                    
         }
     }
     
@@ -114,12 +134,6 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func addShotsToSceneAndBeginAnimation(shots: Array<Shot>) {
-        for s in shots {
-            addChild(s.displays!)
-            s.followTrajectory()
-        }
-    }
    
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -138,9 +152,6 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
-        //let newShots = SceneLogic.spawnNewShots(listTowers: listTowers)
-        //addShotsToSceneAndBeginAnimation(shots: newShots)
     
     }
     

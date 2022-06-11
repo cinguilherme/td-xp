@@ -12,7 +12,7 @@ class Tower {
     
     var display: SKSpriteNode?
     
-    var towerCoolDownTime: Float32 = 0.8
+    var towerCoolDownTime: Float32 = 0.4
     var currentTimeCheck: Float32 = 0.0
     
     var inCoolDown: Bool = true
