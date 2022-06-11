@@ -25,11 +25,11 @@ class Shot {
     static func newShot(startPoint at: CGPoint) -> Shot {
         
         let shot = Shot()
-        shot.displays = SKSpriteNode(color: .cyan, size: CGSize(width: 3.0, height: 6.0))
+        shot.displays = SKSpriteNode(color: .cyan, size: CGSize(width: 2.0, height: 3.0))
         shot.displays?.position = at
         shot.displays?.name = "shot"
         
-        shot.displays?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 9.0, height: 15.0))
+        shot.displays?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 3.0, height: 4.0))
         shot.displays?.physicsBody?.categoryBitMask = shotCategory
         shot.displays?.physicsBody?.affectedByGravity = false
         shot.displays?.physicsBody?.allowsRotation = false

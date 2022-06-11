@@ -68,12 +68,10 @@ class EnemyLevelfactory {
     
     func newEnemiesSpawn() -> Array<Enemy> {
         
-        let range = 0...5
+        let range = 0...10
         return range.map { Int -> Enemy in
             let sp = genRandomSpawnPointAwayFromCentralPoint(centralPoint: centralPoint!)
             return spawnEnemy(centralPoint: centralPoint!, spawnPoint: sp)
         }
-        
-        return []
     }
 }

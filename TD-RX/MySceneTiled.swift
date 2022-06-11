@@ -66,7 +66,7 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
             }
         })
         
-        towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.1), repeats: true, block: { tm in
+        towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.2), repeats: true, block: { tm in
             
             self.listTowers.forEach { t  in
                 self.concurrentQueue.sync {
