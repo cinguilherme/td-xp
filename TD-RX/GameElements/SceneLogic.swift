@@ -11,7 +11,7 @@ class SceneLogic {
 
     static func towersNotOnCoolDown(listTower: Array<Tower>) -> Array<Tower> {
         return listTower.filter { tower in
-            tower.cool_down()
+            !tower.inCoolDown
         }
     }
     

@@ -12,14 +12,21 @@ class Tower {
     
     var display: SKSpriteNode?
     
-    var cooldownTimeTicks = 5
-    
-    var currentTick = 0
+    var towerCoolDownTime: TimeInterval?
+    var coolDownTimer: Timer?
+    var inCoolDown: Bool = true
     
     static func newTower(at: CGPoint) -> Tower {
         let t = Tower()
         t.display = SKSpriteNode(color: .blue, size: CGSize(width: 25.0, height: 25.0))
         t.display?.position = at
+        
+        t.towerCoolDownTime = TimeInterval(0.2)
+        t.inCoolDown = true
+        t.coolDownTimer = Timer.scheduledTimer(withTimeInterval: t.towerCoolDownTime!, repeats: true, block: { _ in
+            t.inCoolDown = false
+        })
+        
         return t
     }
     
@@ -27,25 +34,15 @@ class Tower {
         display = SKSpriteNode(color: .blue, size: CGSize(width: 25.0, height: 25.0))
     }
     
-    func incTick() {
-        if currentTick > cooldownTimeTicks {
-            currentTick = 0
-        } else {
-            currentTick += 1
-        }
-    }
-    
-    func cool_down() -> Bool {
-        incTick()
-        return currentTick == cooldownTimeTicks
-    }
-    
     func spawnShots() -> Array<Shot> {
-        if let display = display {
-            let s = Shot.newShot(startPoint: display.position)
-            return [s]
+        if inCoolDown == false {
+            inCoolDown = true
+            if let display = display {
+                let s = Shot.newShot(startPoint: display.position)
+                return [s]
+            }
         }
-         return []
+        return []
     }
     
 }

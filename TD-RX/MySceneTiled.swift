@@ -26,6 +26,10 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     var central = CentralPillar()
     
+    var enemySpawnTimer: Timer?
+    
+    var shotsSpawnTimer: Timer?
+    
     override func sceneDidLoad() {
         print("loaded screen")
         print("wating on tileMapNode to arive")
@@ -34,7 +38,24 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
         addChild(central.display!)
         
         enemyFactory = EnemyLevelfactory()
+        enemyFactory?.setupTimers()
         enemyFactory?.centralPoint = central.point
+        
+        enemySpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(1.0), repeats: true, block: { timer in
+            if let newEnemies = self.enemyFactory?.newEnemiesSpawnByTick() {
+            
+                newEnemies.forEach { Enemy in
+                    self.addChild(Enemy.display!)
+                    Enemy.followTrajectory()
+                }
+            }
+        })
+        
+        shotsSpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.1), repeats: true, block: { timer in
+            let newShots = SceneLogic.spawnNewShots(listTowers: self.listTowers)
+            self.addShotsToSceneAndBeginAnimation(shots: newShots)
+        })
+        
     }
     
     func notifyTileNodeLoaded(node: SKTileMapNode) {
@@ -101,17 +122,9 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        if let newEnemies = enemyFactory?.newEnemiesSpawnByTick() {
-        
-            newEnemies.forEach { Enemy in
-                addChild(Enemy.display!)
-                Enemy.followTrajectory()
-            }
-        }
-        
-        
         let newShots = SceneLogic.spawnNewShots(listTowers: listTowers)
         addShotsToSceneAndBeginAnimation(shots: newShots)
+    
     }
     
 }

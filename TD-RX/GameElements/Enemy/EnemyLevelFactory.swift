@@ -9,13 +9,21 @@ import Foundation
 
 class EnemyLevelfactory {
 
+    var spawnTimeInternal: TimeInterval = TimeInterval(5.0)
+    var spawnTimer: Timer?
+    
+    var coolDown = false
+    
     let limitX = 0
     let limitY = 0
     
-    var spawnTicker = 0
-    let threshHold = 300
-    
     var centralPoint: CGPoint?
+    
+    func setupTimers() {
+        spawnTimer = Timer.scheduledTimer(withTimeInterval: spawnTimeInternal, repeats: true, block: { t in
+            self.coolDown = false
+        })
+    }
     
     func addOrSubRandom() -> String {
         if Bool.random() {
@@ -59,10 +67,8 @@ class EnemyLevelfactory {
     }
     
     func newEnemiesSpawnByTick() -> Array<Enemy> {
-        spawnTicker += 1
-        if spawnTicker >= threshHold {
-            spawnTicker = 0
-            
+        if coolDown == false {
+            coolDown = true
             let range = 0...5
             return range.map { Int -> Enemy in
                 let sp = genRandomSpawnPointAwayFromCentralPoint(centralPoint: centralPoint!)
