@@ -23,9 +23,6 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     var listTowers: Array<Tower> = []
     
     var enemyFactory: EnemyLevelfactory?
-    var enemies: Array<Enemy> = []
-    
-    var liveShots: Array<Shot> = []
     
     var central = CentralPillar()
     
@@ -80,17 +77,6 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
             s.followTrajectory()
         }
     }
-    
-    func collisionDetection() {
-
-        let hitCol = SceneLogic.collisionDetection(enemies: enemies, liveShots: liveShots)
-        
-        hitCol.forEach { (enemy, shots) in
-            print("enemy was hit by")
-            print(shots)
-        }
-        
-    }
    
     override func didMove(to view: SKView) {
         //let enemy = self.childNode(withName: "enemy")
@@ -101,34 +87,31 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         let secondNode = contact.bodyB.node as! SKSpriteNode
-        print(secondNode)
+        //print(secondNode)
         if (contact.bodyA.categoryBitMask == enemyCategory) &&
             (contact.bodyB.categoryBitMask == shotCategory) {
 
             let contactPoint = contact.contactPoint
             
-            print(contactPoint)
+            //print(contactPoint)
             
             
         }
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
         if let newEnemies = enemyFactory?.newEnemiesSpawnByTick() {
-            enemies.append(contentsOf: newEnemies)
+        
             newEnemies.forEach { Enemy in
                 addChild(Enemy.display!)
                 Enemy.followTrajectory()
             }
         }
         
-        liveShots = SceneLogic.clearDeadShots(liveShots)
+        
         let newShots = SceneLogic.spawnNewShots(listTowers: listTowers)
-        liveShots.append(contentsOf: newShots)
-        
         addShotsToSceneAndBeginAnimation(shots: newShots)
-        
-        //collisionDetection()
     }
     
 }

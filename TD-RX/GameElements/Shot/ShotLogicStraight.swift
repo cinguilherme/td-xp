@@ -12,12 +12,12 @@ func shotLogicInLineDestination(from: CGPoint, direction: Direction) -> CGPoint 
     let y = from.y
     switch direction {
     case .North:
-        return CGPoint(x: x, y: (y + 1000.0))
+        return CGPoint(x: x, y: (y + 700.0))
     case .East:
-        return CGPoint(x: (x + 1000), y: y)
+        return CGPoint(x: (x + 700), y: y)
     case .West:
-        return CGPoint(x: (x - 1000), y: y)
+        return CGPoint(x: (x - 700), y: y)
     case .South:
-        return CGPoint(x: x, y: (y - 1000.0))
+        return CGPoint(x: x, y: (y - 700.0))
     }
 }

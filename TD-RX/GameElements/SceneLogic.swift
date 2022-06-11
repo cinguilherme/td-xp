@@ -44,4 +44,10 @@ class SceneLogic {
             s.displays?.parent != nil
         }
     }
+    
+    static func clearDeadEnemies(_ enemies: Array<Enemy>) -> Array<Enemy> {
+        return enemies.filter { s in
+            s.display?.parent != nil
+        }
+    }
 }
