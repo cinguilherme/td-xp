@@ -36,6 +36,8 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     let enemyDispatchQueue = DispatchQueue(label: "enemy_factory", attributes: .concurrent)
     
+    let collisionQueue = DispatchQueue(label: "collision_queue", attributes: .concurrent)
+    
     override func sceneDidLoad() {
         print("loaded screen")
         print("wating on tileMapNode to arive")
@@ -62,7 +64,6 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            
         })
         
         towersCoolDownTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.1), repeats: true, block: { tm in
@@ -78,9 +79,7 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
                     
                 }
             }
-            
         })
-        
     }
     
     func notifyTileNodeLoaded(node: SKTileMapNode) {
@@ -130,24 +129,30 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
         } else {
             print("cell already ocupied, can't act here!")
         }
-        
-        
     }
     
-   
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let secondNode = contact.bodyB.node as! SKSpriteNode
-        //print(secondNode)
-        if (contact.bodyA.categoryBitMask == enemyCategory) &&
-            (contact.bodyB.categoryBitMask == shotCategory) {
-
-            let contactPoint = contact.contactPoint
+        
+        let oneWay = (contact.bodyA.categoryBitMask == enemyCategory) &&
+                            (contact.bodyB.categoryBitMask == shotCategory)
+        let orAnother = (contact.bodyA.categoryBitMask == shotCategory) &&
+                            (contact.bodyB.categoryBitMask == enemyCategory)
+        
+        if oneWay || orAnother {
             
-//            print(contactPoint)
+            if let firstNode = contact.bodyA.node as? SKSpriteNode {
+                firstNode.removeFromParent()
+                
+            }
+            if let secondNode = contact.bodyB.node as? SKSpriteNode {
+                secondNode.removeFromParent()
+            }
+            
+            //let contactPoint = contact.contactPoint
         }
     }
     

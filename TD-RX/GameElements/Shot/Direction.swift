@@ -12,4 +12,8 @@ enum Direction {
     case East
     case West
     case South
+    case SouthWest
+    case SouthEast
+    case NorthEast
+    case NorthWest
 }

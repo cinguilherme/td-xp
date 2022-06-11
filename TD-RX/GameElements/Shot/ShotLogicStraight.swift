@@ -10,14 +10,25 @@ import Foundation
 func shotLogicInLineDestination(from: CGPoint, direction: Direction) -> CGPoint {
     let x = from.x
     let y = from.y
+    
     switch direction {
-    case .North:
-        return CGPoint(x: x, y: (y + 700.0))
-    case .East:
-        return CGPoint(x: (x + 700), y: y)
-    case .West:
-        return CGPoint(x: (x - 700), y: y)
-    case .South:
-        return CGPoint(x: x, y: (y - 700.0))
+    
+        case .North:
+            return CGPoint(x: x, y: (y + 700.0))
+        case .East:
+            return CGPoint(x: (x + 700), y: y)
+        case .West:
+            return CGPoint(x: (x - 700), y: y)
+        case .South:
+            return CGPoint(x: x, y: (y - 700.0))
+        
+        case .NorthWest:
+            return CGPoint(x: (x - 700), y: (y + 700.0))
+        case .SouthWest:
+            return CGPoint(x: (x - 700), y: (y - 700.0))
+        case .SouthEast:
+            return CGPoint(x: (x + 700), y: (y - 700.0))
+        case .NorthEast:
+            return CGPoint(x: (x + 700), y: (y + 700.0))
     }
 }

@@ -33,11 +33,12 @@ class Enemy {
         en.display = SKSpriteNode(color: .brown, size: CGSize(width: 20.0, height: 20.0))
         en.display?.name = "enemy"
         
-        en.display?.physicsBody = SKPhysicsBody(rectangleOf: en.display!.frame.size)
+        en.display?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 35.0, height: 35.0))
         en.display?.physicsBody?.categoryBitMask = enemyCategory
         en.display?.physicsBody?.mass = 0
         en.display?.physicsBody?.affectedByGravity = false
         en.display?.physicsBody?.allowsRotation = false
+        en.display?.physicsBody?.usesPreciseCollisionDetection = true
         
         
         return en
