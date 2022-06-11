@@ -24,6 +24,8 @@ class MySceneTiled: SKScene {
     var enemyFactory: EnemyLevelfactory?
     var enemies: Array<Enemy> = []
     
+    var liveShots: Array<Shot> = []
+    
     var central = CentralPillar()
     
     override func sceneDidLoad() {
@@ -42,7 +44,7 @@ class MySceneTiled: SKScene {
         
         if let node = self.tileMapNode {
             self.gridState = GridState.buildFromSkTileMapNode(node: node)
-            print(self.gridState?.cellHash)
+            //print(self.gridState?.cellHash)
         }
     }
     
@@ -54,7 +56,7 @@ class MySceneTiled: SKScene {
         
         let column = tileMapNode!.tileColumnIndex(fromPosition: point)
         let row = tileMapNode!.tileRowIndex(fromPosition: point)
-        let tile = tileMapNode!.tileDefinition(atColumn: column, row: row)
+        
         
         let actualPoint = tileMapNode!.centerOfTile(atColumn: column, row: row)
         
@@ -86,7 +88,7 @@ class MySceneTiled: SKScene {
         }.flatMap { $0 }
     }
     
-    func shots(listTowers: Array<Tower>) -> Array<Shot> {
+    func spawnNewShots(listTowers: Array<Tower>) -> Array<Shot> {
         return towersNotOnCoolDown(listTower: listTowers).map { t in
             t.spawnShots()
         }.flatMap { $0 }
@@ -99,18 +101,55 @@ class MySceneTiled: SKScene {
         }
     }
     
+    func collisionDetection() {
+
+        enemies.map { enemy -> (Enemy, Array<Shot>) in
+            let shotsHitEnemy = liveShots.filter { shot in
+                enemy.display!.frame.intersects(shot.displays!.frame)
+            }
+            
+            return (enemy, shotsHitEnemy)
+        }.filter { (e, s) in
+            !s.isEmpty
+        }.forEach { (enemy, shots) in
+            print("enemy was hit by")
+            print(shots)
+            
+            
+            
+        }
+        
+    }
+    
+    func clearDeadShots() {
+        liveShots = liveShots.filter { s in
+            s.displays?.parent != nil
+        }
+    }
+    
+    func addNewShots(_ newShots: Array<Shot>) {
+        liveShots.append(contentsOf: newShots)
+    }
+    
     override func update(_ currentTime: TimeInterval) {
-        let shots = shots(listTowers: listTowers)
+        
+        clearDeadShots()
+        
+        let newShots = spawnNewShots(listTowers: listTowers)
+        addNewShots(newShots)
+        
         
         if let newEnemies = enemyFactory?.newEnemiesSpawnByTick() {
+            enemies.append(contentsOf: newEnemies)
             newEnemies.forEach { Enemy in
                 addChild(Enemy.display!)
                 Enemy.followTrajectory()
             }
         }
-        //let enemies = enemies(listEnemies: listEnemies)
         
-        liveShots(shots: shots)
+        liveShots(shots: newShots)
+        
+        collisionDetection()
     }
     
 }

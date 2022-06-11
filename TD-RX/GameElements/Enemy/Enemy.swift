@@ -30,6 +30,7 @@ class Enemy {
         let en = Enemy()
         
         en.display = SKSpriteNode(color: .brown, size: CGSize(width: 20.0, height: 20.0))
+        en.display?.name = "enemy"
         
         return en
     }

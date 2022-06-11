@@ -25,11 +25,11 @@ class EnemyLevelfactory {
     }
     
     func add(val: CGFloat) -> CGFloat {
-        return val + CGFloat.random(in: 200...1000)
+        return val + CGFloat.random(in: 300...1000)
     }
     
     func sub(val: CGFloat) -> CGFloat {
-        return val - CGFloat.random(in: 200...1000)
+        return val - CGFloat.random(in: 300...1000)
     }
     
     func addOrSubFn(_ val: String) -> (CGFloat) -> CGFloat {

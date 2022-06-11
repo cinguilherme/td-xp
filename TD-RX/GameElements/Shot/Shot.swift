@@ -24,6 +24,8 @@ class Shot {
         let shot = Shot()
         shot.displays = SKSpriteNode(color: .cyan, size: CGSize(width: 5.0, height: 5.0))
         shot.displays?.position = at
+        shot.displays?.name = "shot"
+        
         shot.startPoint = at
         
         shot.speed = 0.0
