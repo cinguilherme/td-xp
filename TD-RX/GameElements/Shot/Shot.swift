@@ -58,8 +58,8 @@ class Shot {
             
             displays!.run(SKAction.sequence(
                 [SKAction.group([
-                    SKAction.moveTo(x: destination.x, duration: TimeInterval(1.0)),
-                    SKAction.moveTo(y: destination.y, duration: TimeInterval(1.0))
+                    SKAction.moveTo(x: destination.x, duration: TimeInterval(2.0)),
+                    SKAction.moveTo(y: destination.y, duration: TimeInterval(2.0))
                 ]),
                 SKAction.removeFromParent()]))
         }

@@ -51,7 +51,7 @@ class MySceneTiled: SKScene, SKPhysicsContactDelegate {
             }
         })
         
-        shotsSpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.1), repeats: true, block: { timer in
+        shotsSpawnTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(0.2), repeats: true, block: { timer in
             let newShots = SceneLogic.spawnNewShots(listTowers: self.listTowers)
             self.addShotsToSceneAndBeginAnimation(shots: newShots)
         })
