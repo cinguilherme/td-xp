@@ -6,9 +6,10 @@
 //
 
 import SpriteKit
+import UIKit
 import GameplayKit
 
-class MySceneTiled: SKScene {
+class MySceneTiled: SKScene, SKPhysicsContactDelegate {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -91,6 +92,27 @@ class MySceneTiled: SKScene {
         
     }
    
+    override func didMove(to view: SKView) {
+        //let enemy = self.childNode(withName: "enemy")
+       
+        self.physicsWorld.contactDelegate = self
+        
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let secondNode = contact.bodyB.node as! SKSpriteNode
+        print(secondNode)
+        if (contact.bodyA.categoryBitMask == enemyCategory) &&
+            (contact.bodyB.categoryBitMask == shotCategory) {
+
+            let contactPoint = contact.contactPoint
+            
+            print(contactPoint)
+            
+            
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         if let newEnemies = enemyFactory?.newEnemiesSpawnByTick() {
             enemies.append(contentsOf: newEnemies)
@@ -106,7 +128,7 @@ class MySceneTiled: SKScene {
         
         addShotsToSceneAndBeginAnimation(shots: newShots)
         
-        collisionDetection()
+        //collisionDetection()
     }
     
 }

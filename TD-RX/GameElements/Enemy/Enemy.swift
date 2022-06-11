@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 
 class Enemy {
+    
     var display: SKSpriteNode?
     
     var spawnPoint: CGPoint?
@@ -31,6 +32,13 @@ class Enemy {
         
         en.display = SKSpriteNode(color: .brown, size: CGSize(width: 20.0, height: 20.0))
         en.display?.name = "enemy"
+        
+        en.display?.physicsBody = SKPhysicsBody(rectangleOf: en.display!.frame.size)
+        en.display?.physicsBody?.categoryBitMask = enemyCategory
+        en.display?.physicsBody?.mass = 0
+        en.display?.physicsBody?.affectedByGravity = false
+        en.display?.physicsBody?.allowsRotation = false
+        
         
         return en
     }
